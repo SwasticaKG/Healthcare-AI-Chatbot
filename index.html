@@ -1,0 +1,132 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+ <title>AI Triage Assistant</title>
+</head>
+<body>
+ <h1>Medical Triage Assistant</h1>
+ <textarea id="note" placeholder="Enter patient note..." rows="6" cols="60"></textarea><br><br>
+ <button onclick="analyze()">Analyze</button>
+
+ <h3>Output:</h3>
+ <pre id="result"></pre>
+
+<script>
+async function analyze() {
+    let note = document.getElementById("note").value;
+
+    const response = await fetch("http://localhost:8000/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ note })
+    });
+
+    const data = await response.text();
+    document.getElementById("result").textContent = data;
+}
+</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Triage Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 15px;
+        }
+
+        button {
+            background: #0066ff;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            margin-top: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #004ecc;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #333;
+        }
+
+        pre {
+            background: #1e1e1e;
+            color: #00ff9c;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Medical Triage Assistant</h1>
+
+        <textarea id="note" placeholder="Enter patient note..." rows="6"></textarea>
+
+        <button onclick="analyze()">Analyze</button>
+
+        <h3>Output:</h3>
+        <pre id="result"></pre>
+    </div>
+
+    <script>
+        async function analyze() {
+            let note = document.getElementById("note").value;
+
+            const response = await fetch("http://localhost:8000/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ note })
+            });
+
+            const data = await response.text();
+
+            document.getElementById("result").textContent = formatOutput(data);
+        }
+
+        // Function to fix formatting
+        function formatOutput(text) {
+            return text
+                .replace(/\\n/g, "\n")       // Convert \n to actual newlines
+                .replace(/\\t/g, "    ");    // Convert \t to spaces
+        }
+    </script>
+</body>
+</html>
