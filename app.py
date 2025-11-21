@@ -13,8 +13,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-client = Groq(api_key="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")
+#Api key is encrypted because it will cause security issue
+client = Groq(api_key="GROQ Cloud API KEY")
 
 class InputNote(BaseModel):
     note: str
@@ -54,3 +54,4 @@ RED FLAGS:
     )
 
     return response.choices[0].message.content
+
